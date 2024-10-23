@@ -29,9 +29,9 @@ The project can be run locally using `npm run dev` after installing dependencies
 ## Design Considerations
 
 ### Dropdown Options
-Current implementation of determining dropdown options scans across all rows in determining the list of field options. However, this method can impact performance as data scales. Another approach would be to scan only the first row and grab the fields that way. I instead see considerable merit in executing this field list lookup on the columnDef object, especially considering that the typing for dropdown options is already defined by the fields in columnDef. In this sense, columnDef is treated as the source of truth of the data's schema. It would look something like this: 
+Current implementation of determining dropdown options scans across all rows in determining the list of field options. However, this method can impact performance as data scales. Another approach would be to scan only the first row and grab the fields that way. I see considerable merit in executing this field list lookup on the columnDef object, especially considering that the typing for dropdown options is already defined by the fields in columnDef. In this sense, columnDef is treated as the source of truth of the data's schema. It would look something like this: 
 ```
-const getDropdownOptions = useMemo(() => {
+const options = useMemo(() => {
     return columnDefs.map((col) => ({
       label: formatLabel(col.field),
       value: col.field
